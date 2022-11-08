@@ -1,0 +1,316 @@
+[gd_scene load_steps=6 format=3 uid="uid://ban3nfevx8hss"]
+
+[ext_resource type="Texture2D" uid="uid://b0u6sbw1m70t1" path="res://plus_sign_v2.png" id="1_mfimh"]
+[ext_resource type="Script" path="res://Main.gd" id="1_skjuk"]
+[ext_resource type="Texture2D" uid="uid://ceg4j5t22obsn" path="res://pen_icon.jpg" id="2_rduxf"]
+[ext_resource type="Script" path="res://NewObjectCreateMenu.gd" id="4_66uy1"]
+[ext_resource type="Script" path="res://AddListToViewMenu.gd" id="4_ousgn"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_skjuk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.343, 0.38465, 0.49, 1)
+
+[node name="MainListView" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ColorRect" type="ColorRect" parent="MainListView"]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 525.0
+offset_bottom = 945.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1711, 0.200825, 0.29, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MainListView"]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 525.0
+offset_bottom = 945.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainListView/MarginContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 920.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBanner" type="HBoxContainer" parent="MainListView/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 490.0
+offset_bottom = 48.0
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
+layout_mode = 2
+offset_right = 159.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 32
+text = "Main View"
+
+[node name="AddListToView" type="Button" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
+custom_minimum_size = Vector2i(45, 45)
+layout_mode = 2
+offset_left = 380.0
+offset_right = 425.0
+offset_bottom = 48.0
+size_flags_horizontal = 10
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MainListView/MarginContainer/VBoxContainer/TopBanner/AddListToView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mfimh")
+ignore_texture_size = true
+
+[node name="CreateNewList" type="Button" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
+custom_minimum_size = Vector2i(45, 45)
+layout_mode = 2
+offset_left = 445.0
+offset_right = 490.0
+offset_bottom = 48.0
+size_flags_horizontal = 8
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MainListView/MarginContainer/VBoxContainer/TopBanner/CreateNewList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rduxf")
+ignore_texture_size = true
+
+[node name="ListView" type="ScrollContainer" parent="MainListView/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 52.0
+offset_right = 490.0
+offset_bottom = 910.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainListView/MarginContainer/VBoxContainer/ListView"]
+layout_mode = 2
+offset_right = 490.0
+offset_bottom = 858.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="NewObjectCreateMenu" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2i(448, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_66uy1")
+
+[node name="ColorRect" type="ColorRect" parent="NewObjectCreateMenu"]
+custom_minimum_size = Vector2i(0, 153)
+layout_mode = 2
+offset_right = 448.0
+offset_bottom = 153.0
+color = Color(0.172549, 0.2, 0.290196, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="NewObjectCreateMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="NewObjectCreateMenu/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 438.0
+offset_bottom = 143.0
+color = Color(0.337255, 0.372549, 0.509804, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewObjectCreateMenu/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 438.0
+offset_bottom = 143.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 428.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Create New Object"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 68.0
+offset_right = 428.0
+offset_bottom = 113.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+offset_left = 15.0
+offset_right = 413.0
+offset_bottom = 45.0
+theme_override_constants/separation = 40
+
+[node name="Button" type="Button" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2i(0, 45)
+layout_mode = 2
+offset_right = 179.0
+offset_bottom = 45.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "New Collection"
+
+[node name="Button2" type="Button" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2i(0, 45)
+layout_mode = 2
+offset_left = 219.0
+offset_right = 398.0
+offset_bottom = 45.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "New List"
+
+[node name="AddListToViewMenu" type="MarginContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2i(448, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_ousgn")
+
+[node name="ColorRect" type="ColorRect" parent="AddListToViewMenu"]
+custom_minimum_size = Vector2i(0, 153)
+layout_mode = 2
+offset_right = 448.0
+offset_bottom = 153.0
+color = Color(0.172549, 0.2, 0.290196, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="AddListToViewMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="AddListToViewMenu/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 438.0
+offset_bottom = 293.0
+color = Color(0.337255, 0.372549, 0.509804, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddListToViewMenu/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 438.0
+offset_bottom = 293.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="AddListToViewMenu/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 428.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Add List To View"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="AddListToViewMenu/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 68.0
+offset_right = 428.0
+offset_bottom = 283.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AddListToViewMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2i(0, 200)
+layout_mode = 2
+offset_left = 15.0
+offset_right = 413.0
+offset_bottom = 200.0
+
+[node name="ListMenu" type="VBoxContainer" parent="AddListToViewMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+offset_right = 398.0
+offset_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[connection signal="pressed" from="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button2" to="NewObjectCreateMenu" method="_on_button_2_pressed"]
+[connection signal="visibility_changed" from="AddListToViewMenu" to="AddListToViewMenu" method="_on_add_list_to_view_menu_visibility_changed"]

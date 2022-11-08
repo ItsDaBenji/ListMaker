@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/List.gd" id="1_ormsu"]
+
+[resource]
+script = ExtResource("1_ormsu")
+list_name = "Test List"
+list_items = []

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://tq6fmq731wtf"]
+
+[ext_resource type="Script" path="res://Scripts/List.gd" id="1_udjyt"]
+
+[resource]
+script = ExtResource("1_udjyt")
+list_name = "Test List 1"
+list_items = [null]
