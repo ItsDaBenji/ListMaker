@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ban3nfevx8hss"]
 
-[ext_resource type="Texture2D" uid="uid://b0u6sbw1m70t1" path="res://plus_sign_v2.png" id="1_mfimh"]
-[ext_resource type="Script" path="res://Main.gd" id="1_skjuk"]
-[ext_resource type="Texture2D" uid="uid://ceg4j5t22obsn" path="res://pen_icon.jpg" id="2_rduxf"]
-[ext_resource type="Script" path="res://NewObjectCreateMenu.gd" id="4_66uy1"]
-[ext_resource type="Script" path="res://AddListToViewMenu.gd" id="4_ousgn"]
+[ext_resource type="Script" path="res://Main.gd" id="1_chtqn"]
+[ext_resource type="Texture2D" uid="uid://b0u6sbw1m70t1" path="res://plus_sign_v2.png" id="2_xpejh"]
+[ext_resource type="Texture2D" uid="uid://ceg4j5t22obsn" path="res://pen_icon.jpg" id="3_46e56"]
+[ext_resource type="Script" path="res://NewObjectCreateMenu.gd" id="4_15tga"]
+[ext_resource type="Script" path="res://AddListToViewMenu.gd" id="5_a378w"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_skjuk")
+script = ExtResource("1_chtqn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.343, 0.38465, 0.49, 1)
+color = Color(0.654902, 0.701961, 0.819608, 1)
 
 [node name="MainListView" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -46,7 +46,7 @@ offset_bottom = 945.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.1711, 0.200825, 0.29, 1)
+color = Color(0.172549, 0.2, 0.290196, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="MainListView"]
 layout_mode = 2
@@ -97,7 +97,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_mfimh")
+texture = ExtResource("2_xpejh")
 ignore_texture_size = true
 
 [node name="CreateNewList" type="Button" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
@@ -116,7 +116,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_rduxf")
+texture = ExtResource("3_46e56")
 ignore_texture_size = true
 
 [node name="ListView" type="ScrollContainer" parent="MainListView/MarginContainer/VBoxContainer"]
@@ -145,16 +145,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -634.0
+offset_right = 224.0
+offset_bottom = -481.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_66uy1")
+script = ExtResource("4_15tga")
 
 [node name="ColorRect" type="ColorRect" parent="NewObjectCreateMenu"]
 custom_minimum_size = Vector2i(0, 153)
 layout_mode = 2
 offset_right = 448.0
 offset_bottom = 153.0
-color = Color(0.172549, 0.2, 0.290196, 1)
+color = Color(0.654902, 0.701961, 0.819608, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="NewObjectCreateMenu/ColorRect"]
 layout_mode = 1
@@ -174,7 +178,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 438.0
 offset_bottom = 143.0
-color = Color(0.337255, 0.372549, 0.509804, 1)
+color = Color(0.172549, 0.2, 0.290196, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NewObjectCreateMenu/ColorRect/MarginContainer"]
 layout_mode = 2
@@ -230,7 +234,6 @@ theme_override_font_sizes/font_size = 20
 text = "New List"
 
 [node name="AddListToViewMenu" type="MarginContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2i(448, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -238,16 +241,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -76.5
+offset_right = 224.0
+offset_bottom = 76.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_ousgn")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 80
+script = ExtResource("5_a378w")
 
 [node name="ColorRect" type="ColorRect" parent="AddListToViewMenu"]
 custom_minimum_size = Vector2i(0, 153)
 layout_mode = 2
+offset_top = 80.0
 offset_right = 448.0
-offset_bottom = 153.0
-color = Color(0.172549, 0.2, 0.290196, 1)
+offset_bottom = 233.0
+color = Color(0.654902, 0.701961, 0.819608, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="AddListToViewMenu/ColorRect"]
 layout_mode = 1
@@ -312,5 +324,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
+[connection signal="pressed" from="MainListView/MarginContainer/VBoxContainer/TopBanner/CreateNewList" to="NewObjectCreateMenu" method="_on_create_new_list_pressed"]
+[connection signal="pressed" from="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button" to="NewObjectCreateMenu" method="_on_button_pressed"]
 [connection signal="pressed" from="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button2" to="NewObjectCreateMenu" method="_on_button_2_pressed"]
 [connection signal="visibility_changed" from="AddListToViewMenu" to="AddListToViewMenu" method="_on_add_list_to_view_menu_visibility_changed"]
