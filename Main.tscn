@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ban3nfevx8hss"]
+[gd_scene load_steps=7 format=3 uid="uid://ban3nfevx8hss"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_chtqn"]
 [ext_resource type="Texture2D" uid="uid://b0u6sbw1m70t1" path="res://plus_sign_v2.png" id="2_xpejh"]
 [ext_resource type="Texture2D" uid="uid://ceg4j5t22obsn" path="res://pen_icon.jpg" id="3_46e56"]
 [ext_resource type="Script" path="res://NewObjectCreateMenu.gd" id="4_15tga"]
+[ext_resource type="PackedScene" uid="uid://1ttb5s6juypo" path="res://list_item.tscn" id="4_87wvn"]
 [ext_resource type="Script" path="res://AddListToViewMenu.gd" id="5_a378w"]
 
 [node name="Main" type="Control"]
@@ -16,16 +17,71 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_chtqn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="MainView" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.654902, 0.701961, 0.819608, 1)
+
+[node name="BackgroundColor" type="ColorRect" parent="MainView"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.878431, 0.878431, 0.878431, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainView/BackgroundColor"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderBackground" type="ColorRect" parent="MainView/BackgroundColor/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+offset_right = 540.0
+offset_bottom = 80.0
+color = Color(0.490196, 0.831373, 1, 1)
+
+[node name="Title" type="Label" parent="MainView/BackgroundColor/VBoxContainer/HeaderBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 44
+text = "List Maker++"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainView/BackgroundColor"]
+clip_contents = false
+layout_mode = 0
+offset_top = 84.0
+offset_right = 540.0
+offset_bottom = 960.0
+size_flags_vertical = 3
+
+[node name="ListView" type="VBoxContainer" parent="MainView/BackgroundColor/ScrollContainer"]
+layout_mode = 2
+offset_right = 540.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="ListItem" parent="MainView/BackgroundColor/ScrollContainer/ListView" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_right = 540.0
+offset_bottom = 180.0
 
 [node name="MainListView" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +94,7 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="ColorRect" type="ColorRect" parent="MainListView"]
+visible = false
 layout_mode = 2
 offset_left = 15.0
 offset_top = 15.0
@@ -46,9 +103,9 @@ offset_bottom = 945.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.172549, 0.2, 0.290196, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="MainListView"]
+visible = false
 layout_mode = 2
 offset_left = 15.0
 offset_top = 15.0
@@ -71,22 +128,23 @@ grow_vertical = 2
 [node name="TopBanner" type="HBoxContainer" parent="MainListView/MarginContainer/VBoxContainer"]
 layout_mode = 2
 offset_right = 490.0
-offset_bottom = 48.0
+offset_bottom = 45.0
 theme_override_constants/separation = 20
 
 [node name="TitleLabel" type="Label" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
 layout_mode = 2
-offset_right = 159.0
-offset_bottom = 48.0
+offset_top = 4.0
+offset_right = 148.0
+offset_bottom = 40.0
 theme_override_font_sizes/font_size = 32
 text = "Main View"
 
 [node name="AddListToView" type="Button" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
-custom_minimum_size = Vector2i(45, 45)
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 offset_left = 380.0
 offset_right = 425.0
-offset_bottom = 48.0
+offset_bottom = 45.0
 size_flags_horizontal = 10
 flat = true
 
@@ -101,11 +159,11 @@ texture = ExtResource("2_xpejh")
 ignore_texture_size = true
 
 [node name="CreateNewList" type="Button" parent="MainListView/MarginContainer/VBoxContainer/TopBanner"]
-custom_minimum_size = Vector2i(45, 45)
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 offset_left = 445.0
 offset_right = 490.0
-offset_bottom = 48.0
+offset_bottom = 45.0
 size_flags_horizontal = 8
 flat = true
 
@@ -121,7 +179,7 @@ ignore_texture_size = true
 
 [node name="ListView" type="ScrollContainer" parent="MainListView/MarginContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 52.0
+offset_top = 49.0
 offset_right = 490.0
 offset_bottom = 910.0
 grow_horizontal = 2
@@ -132,13 +190,373 @@ metadata/_edit_use_anchors_ = true
 [node name="VBoxContainer" type="VBoxContainer" parent="MainListView/MarginContainer/VBoxContainer/ListView"]
 layout_mode = 2
 offset_right = 490.0
-offset_bottom = 858.0
+offset_bottom = 11685.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
+[node name="ListItem" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_right = 482.0
+offset_bottom = 44.0
+
+[node name="ListItem2" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 59.0
+offset_right = 482.0
+offset_bottom = 103.0
+
+[node name="ListItem3" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 118.0
+offset_right = 482.0
+offset_bottom = 162.0
+
+[node name="ListItem4" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 177.0
+offset_right = 482.0
+offset_bottom = 221.0
+
+[node name="ListItem5" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 236.0
+offset_right = 482.0
+offset_bottom = 280.0
+
+[node name="ListItem6" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 295.0
+offset_right = 482.0
+offset_bottom = 339.0
+
+[node name="ListItem7" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 354.0
+offset_right = 482.0
+offset_bottom = 398.0
+
+[node name="ListItem8" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 413.0
+offset_right = 482.0
+offset_bottom = 457.0
+
+[node name="ListItem9" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 472.0
+offset_right = 482.0
+offset_bottom = 516.0
+
+[node name="ListItem10" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 531.0
+offset_right = 482.0
+offset_bottom = 575.0
+
+[node name="ListItem11" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 590.0
+offset_right = 482.0
+offset_bottom = 634.0
+
+[node name="ListItem12" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 649.0
+offset_right = 482.0
+offset_bottom = 693.0
+
+[node name="ListItem13" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 708.0
+offset_right = 482.0
+offset_bottom = 752.0
+
+[node name="ListItem14" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 767.0
+offset_right = 482.0
+offset_bottom = 811.0
+
+[node name="ListItem15" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 826.0
+offset_right = 482.0
+offset_bottom = 870.0
+
+[node name="ListItem16" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 885.0
+offset_right = 482.0
+offset_bottom = 929.0
+
+[node name="ListItem17" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 944.0
+offset_right = 482.0
+offset_bottom = 988.0
+
+[node name="ListItem18" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1003.0
+offset_right = 482.0
+offset_bottom = 1047.0
+
+[node name="ListItem19" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1062.0
+offset_right = 482.0
+offset_bottom = 1106.0
+
+[node name="ListItem20" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1121.0
+offset_right = 482.0
+offset_bottom = 1165.0
+
+[node name="ListItem21" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1180.0
+offset_right = 482.0
+offset_bottom = 1224.0
+
+[node name="ListItem22" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1239.0
+offset_right = 482.0
+offset_bottom = 1283.0
+
+[node name="ListItem23" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1298.0
+offset_right = 482.0
+offset_bottom = 1342.0
+
+[node name="ListItem24" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1357.0
+offset_right = 482.0
+offset_bottom = 1401.0
+
+[node name="ListItem25" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1416.0
+offset_right = 482.0
+offset_bottom = 1460.0
+
+[node name="ListItem26" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1475.0
+offset_right = 482.0
+offset_bottom = 1519.0
+
+[node name="ListItem27" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1534.0
+offset_right = 482.0
+offset_bottom = 1578.0
+
+[node name="ListItem28" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1593.0
+offset_right = 482.0
+offset_bottom = 1637.0
+
+[node name="ListItem29" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1652.0
+offset_right = 482.0
+offset_bottom = 1696.0
+
+[node name="ListItem30" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1711.0
+offset_right = 482.0
+offset_bottom = 1755.0
+
+[node name="ListItem31" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1770.0
+offset_right = 482.0
+offset_bottom = 1814.0
+
+[node name="ListItem32" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1829.0
+offset_right = 482.0
+offset_bottom = 1873.0
+
+[node name="ListItem33" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1888.0
+offset_right = 482.0
+offset_bottom = 1932.0
+
+[node name="ListItem34" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 1947.0
+offset_right = 482.0
+offset_bottom = 1991.0
+
+[node name="ListItem35" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2006.0
+offset_right = 482.0
+offset_bottom = 2050.0
+
+[node name="ListItem36" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2065.0
+offset_right = 482.0
+offset_bottom = 2109.0
+
+[node name="ListItem37" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2124.0
+offset_right = 482.0
+offset_bottom = 2168.0
+
+[node name="ListItem38" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2183.0
+offset_right = 482.0
+offset_bottom = 2227.0
+
+[node name="ListItem39" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2242.0
+offset_right = 482.0
+offset_bottom = 2286.0
+
+[node name="ListItem40" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2301.0
+offset_right = 482.0
+offset_bottom = 2345.0
+
+[node name="ListItem41" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2360.0
+offset_right = 482.0
+offset_bottom = 2404.0
+
+[node name="ListItem42" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2419.0
+offset_right = 482.0
+offset_bottom = 2463.0
+
+[node name="ListItem43" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2478.0
+offset_right = 482.0
+offset_bottom = 2522.0
+
+[node name="ListItem44" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2537.0
+offset_right = 482.0
+offset_bottom = 2581.0
+
+[node name="ListItem45" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2596.0
+offset_right = 482.0
+offset_bottom = 2640.0
+
+[node name="ListItem46" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2655.0
+offset_right = 482.0
+offset_bottom = 2699.0
+
+[node name="ListItem47" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2714.0
+offset_right = 482.0
+offset_bottom = 2758.0
+
+[node name="ListItem48" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2773.0
+offset_right = 482.0
+offset_bottom = 2817.0
+
+[node name="ListItem49" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2832.0
+offset_right = 482.0
+offset_bottom = 2876.0
+
+[node name="ListItem50" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2891.0
+offset_right = 482.0
+offset_bottom = 2935.0
+
+[node name="ListItem51" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 2950.0
+offset_right = 482.0
+offset_bottom = 2994.0
+
+[node name="ListItem52" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3009.0
+offset_right = 482.0
+offset_bottom = 3053.0
+
+[node name="ListItem53" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3068.0
+offset_right = 482.0
+offset_bottom = 3112.0
+
+[node name="ListItem54" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3127.0
+offset_right = 482.0
+offset_bottom = 3171.0
+
+[node name="ListItem55" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3186.0
+offset_right = 482.0
+offset_bottom = 3230.0
+
+[node name="ListItem56" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3245.0
+offset_right = 482.0
+offset_bottom = 3289.0
+
+[node name="ListItem57" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3304.0
+offset_right = 482.0
+offset_bottom = 3348.0
+
+[node name="ListItem58" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3363.0
+offset_right = 482.0
+offset_bottom = 3407.0
+
+[node name="ListItem59" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3422.0
+offset_right = 482.0
+offset_bottom = 3466.0
+
+[node name="ListItem60" parent="MainListView/MarginContainer/VBoxContainer/ListView/VBoxContainer" instance=ExtResource("4_87wvn")]
+layout_mode = 2
+offset_top = 3481.0
+offset_right = 482.0
+offset_bottom = 3525.0
+
 [node name="NewObjectCreateMenu" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2i(448, 0)
+visible = false
+custom_minimum_size = Vector2(448, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -154,7 +572,7 @@ grow_vertical = 2
 script = ExtResource("4_15tga")
 
 [node name="ColorRect" type="ColorRect" parent="NewObjectCreateMenu"]
-custom_minimum_size = Vector2i(0, 153)
+custom_minimum_size = Vector2(0, 153)
 layout_mode = 2
 offset_right = 448.0
 offset_bottom = 153.0
@@ -215,7 +633,7 @@ offset_bottom = 45.0
 theme_override_constants/separation = 40
 
 [node name="Button" type="Button" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(0, 45)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 offset_right = 179.0
 offset_bottom = 45.0
@@ -224,7 +642,7 @@ theme_override_font_sizes/font_size = 20
 text = "New Collection"
 
 [node name="Button2" type="Button" parent="NewObjectCreateMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(0, 45)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 offset_left = 219.0
 offset_right = 398.0
@@ -234,7 +652,8 @@ theme_override_font_sizes/font_size = 20
 text = "New List"
 
 [node name="AddListToViewMenu" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2i(448, 0)
+visible = false
+custom_minimum_size = Vector2(448, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -254,7 +673,7 @@ theme_override_constants/margin_bottom = 80
 script = ExtResource("5_a378w")
 
 [node name="ColorRect" type="ColorRect" parent="AddListToViewMenu"]
-custom_minimum_size = Vector2i(0, 153)
+custom_minimum_size = Vector2(0, 153)
 layout_mode = 2
 offset_top = 80.0
 offset_right = 448.0
@@ -278,7 +697,7 @@ layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 438.0
-offset_bottom = 293.0
+offset_bottom = 305.0
 color = Color(0.337255, 0.372549, 0.509804, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AddListToViewMenu/ColorRect/MarginContainer"]
@@ -286,7 +705,7 @@ layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 438.0
-offset_bottom = 293.0
+offset_bottom = 305.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
@@ -310,7 +729,7 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AddListToViewMenu/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2i(0, 200)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 offset_left = 15.0
 offset_right = 413.0
